@@ -28,9 +28,6 @@ namespace EmployeeManagement.Controllers
         //    _logger = logger;
         //}
 
-        [Route("")]
-        [Route("Home")]
-        [Route("Home/Index")]
         public ViewResult Index()
         {
             //return View();
@@ -39,14 +36,14 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        [Route("Home/Details/{id}")]
-        public ViewResult Details(int id)
+        
+        public ViewResult Details(int ?id)
         {
 
 
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepo.GetEmployee(id),
+                Employee = _employeeRepo.GetEmployee(id??1),
                 PageTitle = "Employee Details"
             };
 
