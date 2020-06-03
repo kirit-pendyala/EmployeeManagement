@@ -40,7 +40,6 @@ namespace EmployeeManagement.Controllers
         public ViewResult Details(int ?id)
         {
 
-
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
                 Employee = _employeeRepo.GetEmployee(id??1),
