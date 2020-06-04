@@ -17,8 +17,8 @@ namespace EmployeeManagement.Models
             ErrorMessage ="Invalid Email Property. Kindly Use in these format Example@.com")]
         [Display(Name = "Office Email")]
         public string Email { get; set; }
-
-        public Dept Department { get; set; }
+        [Required]
+        public Dept? Department { get; set; }
 
 
     }
