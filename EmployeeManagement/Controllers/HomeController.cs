@@ -13,7 +13,7 @@ namespace EmployeeManagement.Controllers
     public class HomeController : Controller
     {
 
-        private IEmployeeRepo _employeeRepo;
+        private readonly IEmployeeRepo _employeeRepo;
 
         public HomeController(IEmployeeRepo employeeRepo)
         {
@@ -65,11 +65,19 @@ namespace EmployeeManagement.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
 
+        }
+
+
+        [HttpPost]
+        public RedirectToActionResult Create(Employee employee)
+        {
+            Employee newemployee = _employeeRepo.Add(employee);
+            return RedirectToAction("Details", new { id = newemployee.Id });
         }
     }
 }
