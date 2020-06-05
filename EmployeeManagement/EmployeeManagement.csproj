@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200605143350_AddPhotoPathColumn.cs" />
+    <Compile Remove="Migrations\20200605143350_AddPhotoPathColumn.Designer.cs" />
+    <Compile Remove="Migrations\20200605144722_SomeProperty.cs" />
+    <Compile Remove="Migrations\20200605144722_SomeProperty.Designer.cs" />
+    <Compile Remove="Migrations\20200605145608_AddSomeProperty.cs" />
+    <Compile Remove="Migrations\20200605145608_AddSomeProperty.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />

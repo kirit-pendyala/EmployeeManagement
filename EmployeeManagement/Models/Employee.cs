@@ -23,5 +23,6 @@ namespace EmployeeManagement.Models
         public string PhotoPath { get; set; }
 
 
+
     }
 }
