@@ -3,14 +3,16 @@ using EmployeeManagement.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EmployeeManagement.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200605151956_AddMobileField")]
+    partial class AddMobileField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,8 +34,8 @@ namespace EmployeeManagement.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Mobile")
-                        .HasColumnType("nvarchar(10)")
+                    b.Property<int>("Mobile")
+                        .HasColumnType("int")
                         .HasMaxLength(10);
 
                     b.Property<string>("Name")
@@ -54,6 +56,7 @@ namespace EmployeeManagement.Migrations
                             Id = 1,
                             Department = 2,
                             Email = "Mary@gmail.com",
+                            Mobile = 0,
                             Name = "Mary"
                         },
                         new
@@ -61,6 +64,7 @@ namespace EmployeeManagement.Migrations
                             Id = 2,
                             Department = 1,
                             Email = "K@gmail.com",
+                            Mobile = 0,
                             Name = "K"
                         });
                 });

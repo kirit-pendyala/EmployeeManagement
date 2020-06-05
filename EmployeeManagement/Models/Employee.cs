@@ -22,6 +22,12 @@ namespace EmployeeManagement.Models
 
         public string PhotoPath { get; set; }
 
+        [MaxLength(12, ErrorMessage ="Please Enter a Valid Mobile Number")]
+        [RegularExpression(@"[0-9]{3}-[0-9]{3}-[0-9]{4}$", ErrorMessage = "Please enter the phone number as XXX-XXX-XXXX")]
+        //[DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
+        [Phone]
+        public string Mobile { get; set; }
+
 
 
     }
