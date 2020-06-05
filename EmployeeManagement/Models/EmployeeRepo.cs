@@ -14,10 +14,27 @@ namespace EmployeeManagement.Models
         {
             _employeeList = new List<Employee>()
             {
-                new Employee() { Id = 1, Name = "Mary", Department = "HR", Email = "Mary@gmail.com" },
-                new Employee() { Id = 2, Name = "John", Department = "IT", Email = "John@gmail.com" },
-                new Employee() { Id = 3, Name = "Sam", Department = "Business", Email = "Sam@gmail.com" }
+                new Employee() { Id = 1, Name = "Mary", Department = Dept.HR, Email = "Mary@gmail.com" },
+                new Employee() { Id = 2, Name = "John", Department = Dept.IT, Email = "John@gmail.com" },
+                new Employee() { Id = 3, Name = "Sam", Department = Dept.Payroll, Email = "Sam@gmail.com" }
             };
+        }
+
+        public Employee Add(Employee employee)
+        {
+            employee.Id = _employeeList.Max(e => e.Id) + 1;
+            _employeeList.Add(employee);
+            return employee;
+        }
+
+        public Employee Delete(int id)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == id);
+            if(employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
         }
 
         public IEnumerable<Employee> GetAllEmployee()
@@ -28,6 +45,18 @@ namespace EmployeeManagement.Models
         public Employee GetEmployee(int Id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == Id);
+        }
+
+        public Employee Update(Employee employeeChanges)
+        {
+            Employee employee = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+            if (employee != null)
+            {
+                employee.Name = employeeChanges.Name;
+                employee.Email = employeeChanges.Email;
+                employee.Department = employeeChanges.Department;
+            }
+            return employee;
         }
     }
 }

@@ -7,17 +7,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace EmployeeManagement.Controllers
 {
     public class HomeController : Controller
     {
 
-        private IEmployeeRepo _employeeRepo;
+        private readonly IEmployeeRepo _employeeRepo;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public HomeController(IEmployeeRepo employeeRepo)
+        public HomeController(IEmployeeRepo employeeRepo,
+                                IHostingEnvironment hostingEnvironment)
         {
             _employeeRepo = employeeRepo;
+            this.hostingEnvironment = hostingEnvironment;
         }
 
         private readonly ILogger<HomeController> _logger;
@@ -63,6 +68,47 @@ namespace EmployeeManagement.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public ViewResult Create()
+        {
+            return View();
+
+        }
+
+
+        [HttpPost]
+        public IActionResult Create(EmployeeCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                string uniquefilename = null;
+                if (model.Photo != null)
+                {
+                    string upLoadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    uniquefilename = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
+
+                    string filePath = Path.Combine(upLoadsFolder, uniquefilename);
+                    model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
+                }
+
+
+                Employee newEmployee = new Employee
+                {
+                    Name = model.Name,
+                    Email= model.Email,
+                    Department = model.Department,
+                    PhotoPath = uniquefilename
+                };
+                _employeeRepo.Add(newEmployee);
+                //Employee newemployee = _employeeRepo.Add(employee);
+                return RedirectToAction("Details", new { id = newEmployee.Id });
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
