@@ -1,10 +1,7 @@
 ﻿using EmployeeManagement.Models;
 using Microsoft.AspNetCore.Http;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeeManagement.ViewModels
 {
@@ -29,8 +26,8 @@ namespace EmployeeManagement.ViewModels
         ////[DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
         //[Phone]
 
-        [MaxLength(12)]
-        [RegularExpression(@"[0-9]{3}-[0-9]{3}-[0-9]{4}$", ErrorMessage = "Please enter the phone number as XXX-XXX-XXXX")]
+        [MaxLength(10)]
+        //[RegularExpression(@"[0-9]{3}-[0-9]{3}-[0-9]{4}$", ErrorMessage = "Please enter the phone number as XXX-XXX-XXXX")]
         //[DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
         [Phone]
         public string Mobile { get; set; }
