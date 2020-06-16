@@ -10,8 +10,10 @@ using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeManagement.Controllers
+
 {
     public class HomeController : Controller
     {
@@ -42,7 +44,6 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
 
-        
         public ViewResult Details(int ?id)
         {
             Employee employee = _employeeRepo.GetEmployee(id.Value);
@@ -63,9 +64,6 @@ namespace EmployeeManagement.Controllers
             //return View();
         }
 
-
-
-
         public IActionResult Privacy()
         {
             return View();
@@ -81,7 +79,6 @@ namespace EmployeeManagement.Controllers
         public ViewResult Create()
         {
             return View();
-
         }
 
         [HttpGet]
@@ -100,9 +97,6 @@ namespace EmployeeManagement.Controllers
             return View(employeeEditViewModel);
 
         }
-
-
-
 
         [HttpPost]
         public IActionResult Edit(EmployeeEditViewModel model)

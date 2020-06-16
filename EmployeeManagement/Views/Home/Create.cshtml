@@ -1,4 +1,5 @@
-﻿@model EmployeeCreateViewModel
+﻿@using DevExtreme.AspNet
+@model EmployeeCreateViewModel
 
 @{
     ViewBag.Title = "Create Employee";
@@ -41,15 +42,28 @@
             </div>
         </div>*@
 
-
-
         <div class="form-group row">
             <label asp-for="Mobile" class="col-sm-2 col-form-label"> </label>
             <div class="col-sm-10">
-                <input asp-for="Mobile" class="form-control " placeholder="(###) ###-####" />
+                @*@Html.DisplayFor(m => m.Mobile)*@
+
+
+                <input asp-for="Mobile" asp-format="(###) ###-####" class="form-control " />
                 <span asp-validation-for="Mobile" class="text-danger"></span>
             </div>
         </div>
+
+
+
+        @*<div class="dx-field">
+            <div class="dx-field-label">Accounting format</div>
+            <div class="dx-field-value">
+                @(Html.DevExtreme().NumberBox()
+                    .Format("$ #,##0.##;($ #,##0.##)")
+                    .Value(-2314.12)
+                )
+            </div>
+        </div>*@
 
 
         <div class="form-group row">
@@ -87,17 +101,14 @@
 
         @section Scripts {
             <script>
-                $(document).ready(function ()
-                {
-                    $('.custom-file-input').on("change", function ()
-                    {
+                $(document).ready(function () {
+                    $('.custom-file-input').on("change", function () {
                         var fileLabel = $(this).next('.custom-file-label');
                         var files = $(this)[0].files;
                         if (files.length > 1) {
                             fileLabel.html(files.length + "files selected");
                         }
-                        else if (files.length == 2)
-                        {
+                        else if (files.length == 2) {
                             fileLabel.html(files[0].name);
 
                         }
@@ -107,6 +118,10 @@
                         //$(this).next('.custom-file-label').html(filename);
                     });
                 });
+
+                                    //$(".Mobile").keyup(function () {
+                                    //    $(this).val($(this).val().replace(/^(\d{3})(\d{3})(\d)+$/, "($1)$2-$3"));
+                                    //});
             </script>
         }
 

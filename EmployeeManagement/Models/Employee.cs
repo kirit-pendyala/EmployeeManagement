@@ -25,7 +25,10 @@ namespace EmployeeManagement.Models
         [MaxLength(10, ErrorMessage ="Please Enter a Valid Mobile Number")]
         //[RegularExpression(@"[0-9]{3}-[0-9]{3}-[0-9]{4}$", ErrorMessage = "Please enter the phone number as XXX-XXX-XXXX")]
         //[DisplayFormat(DataFormatString = "{0:###-###-####}", ApplyFormatInEditMode = true)]
-        [Phone]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        [DataType(DataType.PhoneNumber)]
+        
+
         public string Mobile { get; set; }
 
 
